@@ -33,7 +33,7 @@ function App() {
           </Route>
           {userService.getUser() ? (
              <Switch>
-                <Route exact path="/">
+                <Route exact path="/:username">
                     <ProfilePage user={user} handleLogout={handleLogout}/>
                 </Route>
             </Switch>

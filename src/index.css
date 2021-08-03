@@ -11,3 +11,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.PageHeader-header {
+  background: #C9C9C9 !important;
+}
+
+

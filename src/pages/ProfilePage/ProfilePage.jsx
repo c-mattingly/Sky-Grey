@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 
 export default function ProfilePage({ user, handleLogout}) {
     const [profileUser, setProfileUser] = useState({});
+    const [cities, setCities] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
@@ -15,6 +16,7 @@ export default function ProfilePage({ user, handleLogout}) {
         try {
           const data = await userService.getProfile(username);
           console.log(data, " data");
+          console.log(username)
     
           // data is the response from the controller function /api/users/profile
           // go to the controller function and look at what is returned
@@ -22,7 +24,7 @@ export default function ProfilePage({ user, handleLogout}) {
           setLoading(() => false);
           setProfileUser(() => data.user);
         } catch (err) {
-          console.log(err);
+          console.log(err + " <--error");
           setError("Profile does not Exist");
         }
       }
@@ -34,7 +36,7 @@ export default function ProfilePage({ user, handleLogout}) {
       if (error) {
         return (
           <>
-            <PageHeader />
+            <PageHeader user={user} handleLogout={handleLogout}/>
             <h1>{error}</h1>
           </>
         );
@@ -55,7 +57,6 @@ export default function ProfilePage({ user, handleLogout}) {
           </Grid>
         );
       }
-    
       return (
         <>
           <Grid>
@@ -66,7 +67,7 @@ export default function ProfilePage({ user, handleLogout}) {
             </Grid.Row>
             <Grid.Row>
               <Grid.Column>
-                Current Conditions Card
+                <h1>{{ username }}</h1>
               </Grid.Column>
               <Grid.Column>
                   7-Day Forecast
