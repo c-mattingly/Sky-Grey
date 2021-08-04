@@ -57,7 +57,6 @@ function getProfile(username){
   })
 }
 
-
 export default {
   signup, 
   logout,

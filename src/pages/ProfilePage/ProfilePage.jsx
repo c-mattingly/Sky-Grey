@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Grid, Loader } from "semantic-ui-react";
 import userService from "../../utils/userService";
 import PageHeader from "../../components/PageHeader/PageHeader";
+import CurrentWeather from "../../components/CurrentWeather/CurrentWeather";
 import { useParams } from "react-router-dom";
 
-export default function ProfilePage({ user, handleLogout}) {
+export default function ProfilePage({ user, handleLogout, logo, setLogo}) {
     const [profileUser, setProfileUser] = useState({});
     const [cities, setCities] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -36,7 +37,7 @@ export default function ProfilePage({ user, handleLogout}) {
       if (error) {
         return (
           <>
-            <PageHeader user={user} handleLogout={handleLogout}/>
+            <PageHeader user={user} handleLogout={handleLogout} logo={logo} setLogo={setLogo}/>
             <h1>{error}</h1>
           </>
         );
@@ -62,17 +63,20 @@ export default function ProfilePage({ user, handleLogout}) {
           <Grid>
             <Grid.Row>
               <Grid.Column>
-                <PageHeader user={user} handleLogout={handleLogout}/>
+                <PageHeader logo={logo} user={user} handleLogout={handleLogout} logo={logo}/>
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
-              <Grid.Column>
                 <h1> {username}, here is the current weather in your cities</h1>
                 <hr />
-              </Grid.Column>
-              <Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+                <Grid.Column>
+                    <CurrentWeather user={user} />
+                </Grid.Column>
+                <Grid.Column>
                   7-Day Forecast
-              </Grid.Column>
+                </Grid.Column>
             </Grid.Row>
             <Grid.Row centered>
               <Grid.Column style={{ maxWidth: 750 }}>
