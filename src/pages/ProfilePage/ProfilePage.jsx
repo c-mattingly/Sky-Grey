@@ -24,7 +24,7 @@ export default function ProfilePage({ user, handleLogout}) {
           setLoading(() => false);
           setProfileUser(() => data.user);
         } catch (err) {
-          console.log(err + " <--error");
+          console.log(err);
           setError("Profile does not Exist");
         }
       }
@@ -67,7 +67,8 @@ export default function ProfilePage({ user, handleLogout}) {
             </Grid.Row>
             <Grid.Row>
               <Grid.Column>
-                <h1>{{ username }}</h1>
+                <h1> {username}, here is the current weather in your cities</h1>
+                <hr />
               </Grid.Column>
               <Grid.Column>
                   7-Day Forecast

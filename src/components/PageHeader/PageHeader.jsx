@@ -8,12 +8,13 @@ export default function PageHeader({user, handleLogout}){
     console.log(user)
     return (
         <Segment className="PageHeader-header" clearing>
-            <Header as='h2' floated='right'>
+            <Header as='h3' floated='left'>
+                <Link to={`/${user.username}`}>{user.username}</Link>
+            </Header>
+            <Header as='h3' floated='right'>
                 <Link to='' onClick={handleLogout}>Logout</Link>
             </Header>
-            <Header as='h2' floated='left'>
-                {/* <Link to="/">`${user.username}`</Link> */}
-            </Header>
+            
         </Segment>
     )
 }

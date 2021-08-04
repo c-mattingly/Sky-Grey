@@ -49,10 +49,12 @@ async function profile(req, res) {
 
     if(!user) res.status(404).json({message: 'bad parameters'})
     
-    const cities = await City.find({user: user._id})
+    // const cities = await City.find({user: user._id})
+    console.log(user)
+    res.status(200).json({user: user})
   } catch(err) {
     console.log(err)
-    res.json({err})
+    res.status(401).json(err);
   }
 }
 

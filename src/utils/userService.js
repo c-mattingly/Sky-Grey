@@ -63,5 +63,5 @@ export default {
   logout,
   login,
   getUser,
-  // getProfile,
+  getProfile,
 };
