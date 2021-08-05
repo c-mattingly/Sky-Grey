@@ -16,7 +16,7 @@ function App() {
   const [logo, setLogo] = useState("/logo-blue.png");
   const [citySearch, setCitySearch] = useState("");
   const [city, setCity] = useState(null);
-  const cityUrl = `https://api.openweathermap.org/data/2.5/weather?q=${citySearch}&units=imperial&appid=1a9b0c73d99933983e32c746ccccd357`;
+  const cityUrl = `https://api.openweathermap.org/data/2.5/weather?q=${citySearch}&units=imperial&appid=${process.env.REACT_APP_WEATHER_API}`;
 
   function handleSignUpOrLogin(){
     setUser(userService.getUser()); // getting the user from localstorage decoding the jwt
@@ -30,10 +30,11 @@ function App() {
   useEffect(() => {
     if (citySearch) {
       fetch(cityUrl)
+      console.log(cityUrl)
         .then((res) => res.json())
         .then((data) => {
-          console.log(data.data[0]);
-          setCity(data.data[0]);
+          console.log(data);
+          setCity(data.data[0])
         });
     }
   }, [citySearch]);

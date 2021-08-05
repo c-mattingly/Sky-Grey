@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import { Card, Grid, Image } from 'semantic-ui-react';
 
-export default function CurrentWeater({user, name}) {
+export default function CurrentWeather({user, name}) {
 
 
     function capitalizeFirstLetter(str) {
