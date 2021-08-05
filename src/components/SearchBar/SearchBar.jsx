@@ -1,18 +1,25 @@
 import React, { useState } from "react";
-import {Link} from 'react-router-dom';
+import {useHistory, Link} from 'react-router-dom';
 
 export default function SearchBar ({user, handleFormSubmit, city, searchCity}) {
   const [citySearch, setCitySearch] = useState("");
+  const history = useHistory();
 
   function handleInput(e) {
     setCitySearch(e.target.value);
   }
 
+//   function handleSubmit(e) {
+//     e.preventDefault();
+//     handleFormSubmit(citySearch);
+//   }
+
   function handleSubmit(e) {
     e.preventDefault();
     handleFormSubmit(citySearch);
+    history.push(`/cities/${citySearch}`);
+    
   }
-
   
 
 
@@ -28,7 +35,7 @@ export default function SearchBar ({user, handleFormSubmit, city, searchCity}) {
         value={citySearch}
         onChange={handleInput}
       />
-      <button type="submit"><Link to={`/cities/${citySearch}`}>Search</Link></button>
+      <button type="submit">Search</button>
     </form>
   );
 }
