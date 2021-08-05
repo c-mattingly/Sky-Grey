@@ -6,13 +6,11 @@ import CurrentWeather from "../../components/CurrentWeather/CurrentWeather";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import { useParams } from "react-router-dom";
 
-export default function CityPage({ user, handleLogout, logo, handleFormSubmit}) {
-    const [city, setCity] = useState("")
+export default function CityPage({ user, handleLogout, logo, handleFormSubmit, city, searchCity}) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
     const { name } = useParams();
-    console.log(name);
 
 
     // async function getCity() {
@@ -69,18 +67,20 @@ export default function CityPage({ user, handleLogout, logo, handleFormSubmit}) 
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
-                <SearchBar handleFormSubmit={handleFormSubmit}/>
+                <SearchBar handleFormSubmit={handleFormSubmit} name={name} searchCity={searchCity} city={city}/>
             </Grid.Row>
             <Grid.Row>
                 <Grid.Column>
-                    <CurrentWeather user={user} name={name} />
+                    <CurrentWeather user={user} name={name} searchCity={searchCity} city={city} />
                 </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
                 <Grid.Column>
                   7-Day Forecast
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row centered>
-              <Grid.Column style={{ maxWidth: 750 }}>
+              <Grid.Column>
                 Map
               </Grid.Column>
             </Grid.Row>

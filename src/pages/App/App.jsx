@@ -14,10 +14,11 @@ function App() {
   // this object corresponds to the jwt payload which is defined in the server signup or login function that looks like 
   // this  const token = createJWT(user); // where user was the document we created from mongo
   const [logo, setLogo] = useState("/logo-blue.png");
-  const [citySearch, setCitySearch] = useState("");
+  const [citySearch, setCitySearch] = useState("Phoenix");
   const [city, setCity] = useState(null);
   const cityUrl = `https://api.openweathermap.org/data/2.5/weather?q=${citySearch}&units=imperial&appid=${process.env.REACT_APP_WEATHER_API}`;
-
+  console.log(cityUrl)
+  
   function handleSignUpOrLogin(){
     setUser(userService.getUser()); // getting the user from localstorage decoding the jwt
   }
@@ -30,16 +31,17 @@ function App() {
   useEffect(() => {
     if (citySearch) {
       fetch(cityUrl)
-      console.log(cityUrl)
+      
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
-          setCity(data.data[0])
+          setCity(data)
         });
     }
   }, [citySearch]);
 
   function handleFormSubmit(city) {
+    console.log(city)
     setCitySearch(city);
     setCity(null);
   }
@@ -56,10 +58,10 @@ function App() {
           {userService.getUser() ? (
              <Switch>
                 <Route path="/cities/:name">
-                    <CityPage user={user} handleLogout={handleLogout} logo={logo} handleFormSubmit={handleFormSubmit}/>
+                    <CityPage user={user} handleLogout={handleLogout} logo={logo} handleFormSubmit={handleFormSubmit} city={city} citySearch={citySearch}/>
                 </Route>
                 <Route exact path="/:username">
-                    <ProfilePage user={user} handleLogout={handleLogout} logo={logo} handleFormSubmit={handleFormSubmit}/>
+                    <ProfilePage user={user} handleLogout={handleLogout} logo={logo} handleFormSubmit={handleFormSubmit} city={city} citySearch={citySearch}/>
                 </Route>
             </Switch>
           ) : (

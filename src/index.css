@@ -13,9 +13,13 @@ code {
 }
 
 .PageHeader-header {
-  background: #C9C9C9 !important;
+  background: #686666!important;
 }
 
-
+.CurrentWeather-card {
+  background: #686666 !important;
+  text-align: center;
+  color: #FFFFFF !important;
+}
 
 

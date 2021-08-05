@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {Link} from 'react-router-dom';
 
-export default function SearchBar (props) {
+export default function SearchBar ({user, handleFormSubmit, city, searchCity}) {
   const [citySearch, setCitySearch] = useState("");
 
   function handleInput(e) {
@@ -10,7 +10,7 @@ export default function SearchBar (props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    props.handleFormSubmit(citySearch);
+    handleFormSubmit(citySearch);
   }
 
   

@@ -79,7 +79,7 @@ export default function LoginPage(props){
                   type="submit"
                   className="btn"
                 >
-                  Login
+                        Login
                 </Button>
               </Segment>
             </Form>

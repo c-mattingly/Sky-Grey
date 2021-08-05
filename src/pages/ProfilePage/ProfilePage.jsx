@@ -5,7 +5,7 @@ import PageHeader from "../../components/PageHeader/PageHeader";
 import CurrentWeather from "../../components/CurrentWeather/CurrentWeather";
 import { useParams } from "react-router-dom";
 
-export default function ProfilePage({ user, handleLogout, logo, setLogo}) {
+export default function ProfilePage({ user, handleLogout, logo, setLogo, city, searchCity}) {
     const [profileUser, setProfileUser] = useState({});
     const [cities, setCities] = useState([]);
     const [loading, setLoading] = useState(true);
