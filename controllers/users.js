@@ -10,7 +10,6 @@ module.exports = {
 };
 
 async function signup(req, res) {
-  console.log(req.body + "<--- this")
   
   const user = new User(req.body);
     try {

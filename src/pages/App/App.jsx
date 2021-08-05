@@ -17,6 +17,8 @@ function App() {
   const [citySearch, setCitySearch] = useState("Phoenix");
   const [city, setCity] = useState(null);
   const cityUrl = `https://api.openweathermap.org/data/2.5/weather?q=${citySearch}&units=imperial&appid=${process.env.REACT_APP_WEATHER_API}`;
+  const zipUrl = `https://api.openweathermap.org/data/2.5/weather?zip=${citySearch}&units=imperial&appid=${process.env.REACT_APP_WEATHER_API}`;
+  const zipFcast = `https://api.openweathermap.org/data/2.5/forecast?zip=${citySearch}&units=imperial&appid=${process.env.REACT_APP_WEATHER_API}`
   console.log(cityUrl)
   
   function handleSignUpOrLogin(){
@@ -28,15 +30,30 @@ function App() {
     setUser({user: null})
   }
 
+  function checkIfZip(str) {
+    return /\d/.test(str);
+  }
+
   useEffect(() => {
     if (citySearch) {
-      fetch(cityUrl)
-      
+
+      if (checkIfZip(citySearch)) {
+        fetch(zipUrl)
+
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
           setCity(data)
         });
+      } else {
+        fetch(cityUrl)
+
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setCity(data)
+        });
+      }  
     }
   }, [citySearch]);
 

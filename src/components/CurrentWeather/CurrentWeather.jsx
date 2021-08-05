@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import { Card, Grid, Image } from 'semantic-ui-react';
+import { Card, Image } from 'semantic-ui-react';
 
 export default function CurrentWeather({user, name, city, searchCity}) {
 
@@ -28,7 +28,7 @@ export default function CurrentWeather({user, name, city, searchCity}) {
             <Image src={`/${city.weather[0].icon}.png`} style={{ height: '150px'}} />
             <hr />
             
-            <Card.Header>{capitalizeFirstLetter(name)}</Card.Header>
+            <Card.Header>{capitalizeFirstLetter(city.name)}</Card.Header>
             <Card.Header>
                 {roundDecimal(city.main.temp)}°
             </Card.Header>
