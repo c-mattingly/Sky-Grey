@@ -1,10 +1,34 @@
+// import { post } from "../../routes/api/users";
 import tokenService from "./tokenService";
 
 const BASE_URL = '/api/cities';
 
+export function create(userID) {
+    return fetch(BASE_URL + userID, {
+        method: 'POST',
+        headers: {
+            'Authorization': 'Bearer ' + tokenService.getToken()
+        }
+    }).then(res => {
+		if(res.ok) return res.json()
+	  new Error('Error adding City');
+	})
+}
 
-function getCity(name){
-    return fetch(BASE_URL + name, {
+export function removeCity(cityID){
+	return fetch(`${BASE_URL}cities/${cityID}`, {
+		method: 'DELETE',
+		headers: {
+			'Authorization': 'Bearer ' + tokenService.getToken()
+		}
+	}).then(res => {
+		if(res.ok) return res.json()
+	  new Error('Error revmoving City');
+	})
+}
+
+export function getCity(zip){
+    return fetch(BASE_URL + zip, {
         headers: {
             'Authorization': 'Bearer ' + tokenService.getToken()
         }
@@ -13,7 +37,3 @@ function getCity(name){
         throw new Error('Bad Credentials')
     })
   }
-
-  export default {
-    getCity,
-  };  

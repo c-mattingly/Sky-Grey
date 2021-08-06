@@ -19,18 +19,16 @@ export default function SearchBar ({user, handleFormSubmit, city, searchCity}) {
   return (
     <form onSubmit={handleSubmit}>
       <label htmlFor="citySearch">
-        <b>Zip Code or City: </b>
+        <b>Zip Code: </b>
       </label>
       <input
         id="citySearch"
         type="text"
-        placeholder="city name"
+        placeholder="zip code"
         value={citySearch}
         onChange={handleInput}
       />
       <button type="submit">Search</button><br/>
-      <label>Use + for spaces for accurate search</label><br/>
-      <label>(ex: Las+Vegas,Nevada)</label>
     </form>
   );
 }

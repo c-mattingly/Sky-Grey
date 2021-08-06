@@ -1,63 +1,42 @@
-import React, { useState, useEffect } from "react";
-import { Grid, Loader } from "semantic-ui-react";
-import userService from "../../utils/userService";
+import React, { useState } from "react";
+import { Grid } from "semantic-ui-react";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import CurrentWeather from "../../components/CurrentWeather/CurrentWeather";
 import SearchBar from "../../components/SearchBar/SearchBar";
+import SevenDay from "../../components/SevenDay/SevenDay";
 import { useParams } from "react-router-dom";
+import * as cityAPI from "../../utils/cityApi"
 
 export default function CityPage({ user, handleLogout, logo, handleFormSubmit, city, searchCity}) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
-    const { name } = useParams();
+    const { zip } = useParams();
+    console.log(useParams())
+    console.log(zip)
+    console.log(city)
 
-
-    // async function getCity() {
+    // async function addCity(userID) {
     //     try {
-    //       const data = await userService.getCity(name);
-    //       console.log(data, " data");
-    //       console.log(name)
-    
-    //       // data is the response from the controller function /api/users/profile
-    //       // go to the controller function and look at what is returned
-    //       // posts and user are the properties on the data object
-    //       setLoading(() => false);
-    //       setCity(name)
+    //         const data = await cityAPI.create(userID);
+    //         console.log(data, " this is from addCity");
+    //         getProfile();
     //     } catch (err) {
     //       console.log(err);
-    //       setError("City Not Found");
     //     }
     //   }
 
-    //   useEffect(() => {
-    //     getCity();
-    //   }, []);
-    
-    //   if (error) {
-    //     return (
-    //       <>
-    //         <PageHeader user={user} handleLogout={handleLogout} logo={logo} setLogo={setLogo}/>
-    //         <h1>{error}</h1>
-    //       </>
-    //     );
+    //   console.log(addCity);
+
+    //   async function removeCity(cityID) {
+    //       try {
+    //           const data = await cityAPI.removeCity(cityID)
+    //           getProfile();
+    //       } catch (err) {
+    //           console.log(err);
+    //       }
     //   }
-    
-    //   if (loading) {
-    //     return (
-    //       <Grid
-    //         textAlign="center"
-    //         style={{ height: "100vh" }}
-    //         verticalAlign="middle"
-    //       >
-    //         <Grid.Column style={{ maxWidth: 450 }}>
-    //           <Loader size="large" active>
-    //             Loading
-    //           </Loader>
-    //         </Grid.Column>
-    //       </Grid>
-    //     );
-    //   }
+
 
     return (
         <Grid centered>
@@ -67,16 +46,16 @@ export default function CityPage({ user, handleLogout, logo, handleFormSubmit, c
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
-                <SearchBar handleFormSubmit={handleFormSubmit} name={name} searchCity={searchCity} city={city}/>
+                <SearchBar handleFormSubmit={handleFormSubmit} zip={zip} searchCity={searchCity} city={city}/>
             </Grid.Row>
             <Grid.Row>
                 <Grid.Column>
-                    <CurrentWeather user={user} name={name} searchCity={searchCity} city={city} />
+                    <CurrentWeather zip={zip} city={city} user={user} />
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row>
                 <Grid.Column>
-                  7-Day Forecast
+                    <SevenDay zip={zip}/>
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row centered>

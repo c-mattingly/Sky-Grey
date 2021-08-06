@@ -14,12 +14,12 @@ function App() {
   // this object corresponds to the jwt payload which is defined in the server signup or login function that looks like 
   // this  const token = createJWT(user); // where user was the document we created from mongo
   const [logo, setLogo] = useState("/logo-blue.png");
-  const [citySearch, setCitySearch] = useState("Phoenix");
+  const [citySearch, setCitySearch] = useState("85034");
   const [city, setCity] = useState(null);
-  const cityUrl = `https://api.openweathermap.org/data/2.5/weather?q=${citySearch}&units=imperial&appid=${process.env.REACT_APP_WEATHER_API}`;
+  const [cityFC, setCityFC] = useState(null);
   const zipUrl = `https://api.openweathermap.org/data/2.5/weather?zip=${citySearch}&units=imperial&appid=${process.env.REACT_APP_WEATHER_API}`;
-  const zipFcast = `https://api.openweathermap.org/data/2.5/forecast?zip=${citySearch}&units=imperial&appid=${process.env.REACT_APP_WEATHER_API}`
-  console.log(cityUrl)
+  const zipFCUrl = `https://api.openweathermap.org/data/2.5/forecast?zip=${citySearch}&units=imperial&appid=${process.env.REACT_APP_WEATHER_API}`
+  console.log(zipUrl)
   
   function handleSignUpOrLogin(){
     setUser(userService.getUser()); // getting the user from localstorage decoding the jwt
@@ -30,37 +30,37 @@ function App() {
     setUser({user: null})
   }
 
-  function checkIfZip(str) {
-    return /\d/.test(str);
-  }
-
   useEffect(() => {
     if (citySearch) {
 
-      if (checkIfZip(citySearch)) {
-        fetch(zipUrl)
+      fetch(zipUrl)
 
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          setCity(data)
-        });
-      } else {
-        fetch(cityUrl)
-
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          setCity(data)
-        });
-      }  
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setCity(data)
+      });
     }
   }, [citySearch]);
+
+  // useEffect(() => {
+  //   if (citySearch) {
+  //     fetch(zipFCUrl)
+
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data)
+  //       setCityFC(data);
+  //     })
+  //   }
+  // }, [citySearch])
+
 
   function handleFormSubmit(city) {
     console.log(city)
     setCitySearch(city);
     setCity(null);
+    // setCityFC(null);
   }
 
   return (
@@ -74,7 +74,7 @@ function App() {
           </Route>
           {userService.getUser() ? (
              <Switch>
-                <Route path="/cities/:name">
+                <Route path="/cities/:zip">
                     <CityPage user={user} handleLogout={handleLogout} logo={logo} handleFormSubmit={handleFormSubmit} city={city} citySearch={citySearch}/>
                 </Route>
                 <Route exact path="/:username">

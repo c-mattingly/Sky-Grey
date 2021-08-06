@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Grid, Loader } from "semantic-ui-react";
 import userService from "../../utils/userService";
 import PageHeader from "../../components/PageHeader/PageHeader";
-import CurrentWeather from "../../components/CurrentWeather/CurrentWeather";
+import CityFeed from "../../components/CityFeed/CityFeed";
+import SearchBar from "../../components/SearchBar/SearchBar";
 import { useParams } from "react-router-dom";
+import * as cityAPI from "../../utils/cityApi";
 
-export default function ProfilePage({ user, handleLogout, logo, setLogo, city, searchCity}) {
+export default function ProfilePage({ user, handleLogout, logo, setLogo, city, searchCity, handleFormSubmit}) {
     const [profileUser, setProfileUser] = useState({});
     const [cities, setCities] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -28,6 +30,27 @@ export default function ProfilePage({ user, handleLogout, logo, setLogo, city, s
           console.log(err);
           setError("Profile does not Exist");
         }
+      }
+
+      async function addCity(userID) {
+        try {
+            const data = await cityAPI.create(userID);
+            console.log(data, " this is from addCity");
+            getProfile();
+        } catch (err) {
+          console.log(err);
+        }
+      }
+
+      console.log(addCity);
+
+      async function removeCity(cityID) {
+          try {
+              const data = await cityAPI.removeCity(cityID)
+              getProfile();
+          } catch (err) {
+              console.log(err);
+          }
       }
 
       useEffect(() => {
@@ -67,21 +90,23 @@ export default function ProfilePage({ user, handleLogout, logo, setLogo, city, s
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
+              <Grid.Column>
+              <SearchBar handleFormSubmit={handleFormSubmit} searchCity={searchCity} city={city}/>
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
                 <h1> {username}, here is the current weather in your cities</h1>
                 <hr />
             </Grid.Row>
             <Grid.Row>
                 <Grid.Column>
-                    <CurrentWeather user={user} />
+                    <CityFeed 
+                        user={user}
+                        numCitiesCol={3}
+                        addCity={addCity}
+                        removeCity={removeCity} 
+                    />
                 </Grid.Column>
-                <Grid.Column>
-                  7-Day Forecast
-                </Grid.Column>
-            </Grid.Row>
-            <Grid.Row centered>
-              <Grid.Column style={{ maxWidth: 750 }}>
-                Map
-              </Grid.Column>
             </Grid.Row>
           </Grid>
         </>

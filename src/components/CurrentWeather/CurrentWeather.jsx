@@ -1,12 +1,32 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import { Card, Image } from 'semantic-ui-react';
+import { Card, Image, Icon } from 'semantic-ui-react';
 
-export default function CurrentWeather({user, name, city, searchCity}) {
+export default function CurrentWeather({
+    zip, 
+    city, 
+    user,
+    isProfile,
+    addCity,
+    removeCity
+}) {
 
+    console.log(user.city)
+
+// if (user.city) {
+//     const liked = user.city.findIndex(city => city.zip === zip);
+// } else {
+//     const liked = -1;
+// }
+
+const liked = -1;
+
+const clickHandler = liked > -1 ? () => removeCity(user.city[liked]._id) : () => addCity(city._id);
+const likeIcon = liked > -1 ? 'heart' : 'plus'
+const likeColor = liked > -1 ? 'red' : 'green'
 
     function capitalizeFirstLetter(str) {
-        return str.charAt(0).toUpperCase() + str.slice(1);
+        return str.charAt(0).toUpperCase() + str.slice(1); 
       }
 
     function roundDecimal(int) {
@@ -18,8 +38,9 @@ export default function CurrentWeather({user, name, city, searchCity}) {
         let arr = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
         return arr[(val % 16)];
     }  
-
-    if ((name) && (city)) {
+console.log(city)
+console.log(zip)
+    if ((zip) && (city)) {
 
         return (
             <Card className="CurrentWeather-card" centered>
@@ -38,12 +59,13 @@ export default function CurrentWeather({user, name, city, searchCity}) {
             
             
             <Card.Description>
-                High: {roundDecimal(city.main.temp_max)}°FIX<br/>
-                Low: {roundDecimal(city.main.temp_min)}°FIX<br/>
                 Feels Like: {roundDecimal(city.main.feels_like)}°<br/>
                 Wind: {degToDirection(city.wind.deg)} {roundDecimal(city.wind.speed)} mph <br/>
                 Humidity: {city.main.humidity}%<br/>
             </Card.Description>
+            </Card.Content>
+            <Card.Content extra textAlign={"right"}>
+                <Icon name={likeIcon} size="large" color={likeColor} onClick={clickHandler}/>
             </Card.Content>
         </Card>
         )
