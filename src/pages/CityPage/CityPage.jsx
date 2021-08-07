@@ -15,28 +15,30 @@ export default function CityPage({ user, handleLogout, logo, handleFormSubmit, c
     console.log(useParams())
     console.log(zip)
     console.log(city)
+    console.log(user.id)
 
-    // async function addCity(userID) {
-    //     try {
-    //         const data = await cityAPI.create(userID);
-    //         console.log(data, " this is from addCity");
-    //         getProfile();
-    //     } catch (err) {
-    //       console.log(err);
-    //     }
-    //   }
+    async function addCity(city) {
+        console.log(user._id)
+        try {
+            const data = await cityAPI.create(city);
+            console.log(data, " this is from addCity");
+        
+        } catch (err) {
+          console.log(err);
+        }
+      }
 
-    //   console.log(addCity);
+      console.log(addCity);
 
-    //   async function removeCity(cityID) {
-    //       try {
-    //           const data = await cityAPI.removeCity(cityID)
-    //           getProfile();
-    //       } catch (err) {
-    //           console.log(err);
-    //       }
-    //   }
-
+      async function removeCity(cityID) {
+          try {
+              const data = await cityAPI.removeCity(cityID)
+          
+          } catch (err) {
+              console.log(err);
+          }
+      }
+console.log(user.city)
 
     return (
         <Grid centered>
@@ -50,7 +52,7 @@ export default function CityPage({ user, handleLogout, logo, handleFormSubmit, c
             </Grid.Row>
             <Grid.Row>
                 <Grid.Column>
-                    <CurrentWeather zip={zip} city={city} user={user} />
+                    <CurrentWeather zip={zip} city={city} user={user} addCity={addCity} removeCity={removeCity} />
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row>

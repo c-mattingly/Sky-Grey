@@ -13,11 +13,20 @@ code {
 }
 
 .PageHeader-header {
-  background: #686666!important;
+  background: #4e4d4d!important;
+  padding-bottom: 0px !important;
+}
+
+.PageHeader-link {
+  color: #4FA4F9;
+}
+
+.PageHeader-link:hover {
+  color: #FFFFFF;
 }
 
 .CurrentWeather-card {
-  background: #686666 !important;
+  background: #4e4d4d !important;
   text-align: center;
   color: #FFFFFF !important;
 }

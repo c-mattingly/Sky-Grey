@@ -1,9 +1,9 @@
-// import { post } from "../../routes/api/users";
 import tokenService from "./tokenService";
 
 const BASE_URL = '/api/cities';
 
 export function create(userID) {
+    console.log(userID +  " <--- this is cityAPI create")
     return fetch(BASE_URL + userID, {
         method: 'POST',
         headers: {

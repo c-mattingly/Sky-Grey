@@ -47,21 +47,21 @@ console.log(zip)
                 
             <Card.Content>
             <Image src={`/${city.weather[0].icon}.png`} style={{ height: '150px'}} />
-            <hr />
             
-            <Card.Header>{capitalizeFirstLetter(city.name)}</Card.Header>
+            <Card.Header><h1><span style={{ color: '#4FA4F9'}}>{capitalizeFirstLetter(city.name)}</span></h1></Card.Header>
+            <hr />
             <Card.Header>
-                {roundDecimal(city.main.temp)}°
+            <span style={{ color: '#FFFFFF'}}>{roundDecimal(city.main.temp)}°</span>
             </Card.Header>
             <Card.Header>
-                {city.weather[0].main}
+            <span style={{ color: '#FFFFFF'}}>{city.weather[0].main}</span>
             </Card.Header>
             
             
             <Card.Description>
-                Feels Like: {roundDecimal(city.main.feels_like)}°<br/>
-                Wind: {degToDirection(city.wind.deg)} {roundDecimal(city.wind.speed)} mph <br/>
-                Humidity: {city.main.humidity}%<br/>
+            <span style={{ color: '#FFFFFF'}}><b>Feels Like:</b> {roundDecimal(city.main.feels_like)}°<br/>
+                <b>Wind:</b> {degToDirection(city.wind.deg)} {roundDecimal(city.wind.speed)} mph <br/>
+                <b>Humidity:</b> {city.main.humidity}%<br/></span>
             </Card.Description>
             </Card.Content>
             <Card.Content extra textAlign={"right"}>
