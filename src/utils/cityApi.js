@@ -15,7 +15,7 @@ export function create(zip) {
 }
 
 export function removeCity(zip){
-	return fetch(BASE_URL + zip, {
+	return fetch(`${BASE_URL}${zip}`, {
 		method: 'DELETE',
 		headers: {
 			'Authorization': 'Bearer ' + tokenService.getToken()

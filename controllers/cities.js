@@ -22,9 +22,10 @@ async function create(req, res){
 }
 
 async function deleteCity(req, res) {
+    console.log(req.params)
     try {
-        await City.findByIdAndDelete(req.params.zip)
-        res.json({data: 'city removed'})
+        await City.findOneAndDelete(req.params.zip)
+        res.json({message: 'city removed'})
     } catch(err) {
         console.log(err, 'error removing city')
     }

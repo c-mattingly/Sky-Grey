@@ -32,9 +32,9 @@ export default function CityPage({ user, handleLogout, logo}) {
         }
       }
 
-      async function removeCity(zip) {
+      async function removeCity(cityId) {
           try {
-              const data = await cityAPI.removeCity(zip)
+              const data = await cityAPI.removeCity(cityId)
           
           } catch (err) {
               console.log(err);
@@ -66,7 +66,7 @@ export default function CityPage({ user, handleLogout, logo}) {
             </Grid.Row>
             <Grid.Row>
                 <Grid.Column>
-                    <CurrentWeather city={city} user={user} addCity={addCity} removeCity={removeCity} />
+                    <CurrentWeather city={city} user={user} addCity={addCity} removeCity={removeCity} zip={zip}/>
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row>

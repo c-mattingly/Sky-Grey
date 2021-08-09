@@ -7,16 +7,10 @@ export default function CurrentWeather({
     user,
     isProfile,
     addCity,
-    removeCity
+    removeCity,
+    zip
 }) {
 
-    console.log(user.city)
-
-// if (user.city) {
-//     const liked = user.city.findIndex(city => city.zip === zip);
-// } else {
-//     const liked = -1;
-// }
 
 const liked = -1;
 
@@ -37,7 +31,6 @@ const likeColor = liked > -1 ? 'red' : 'green'
         let arr = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
         return arr[(val % 16)];
     }  
-console.log(city)
 
     if (city) {
 
@@ -47,7 +40,7 @@ console.log(city)
             <Card.Content>
             <Image src={`/${city.weather[0].icon}.png`} style={{ height: '150px'}} />
             
-            <Card.Header><h1><span style={{ color: '#4FA4F9'}}>{capitalizeFirstLetter(city.name)}</span></h1></Card.Header>
+            <Card.Header><h1><span style={{ color: '#4FA4F9'}}>{city.name}</span></h1></Card.Header>
             <hr />
             <Card.Header>
             <span style={{ color: '#FFFFFF'}}>{roundDecimal(city.main.temp)}°</span>
@@ -65,6 +58,7 @@ console.log(city)
             </Card.Content>
             <Card.Content extra textAlign={"right"}>
                 <Icon name={likeIcon} size="large" color={likeColor} onClick={clickHandler}/>
+                <Icon name="minus" size="large" color="red" onClick={removeCity}/>
             </Card.Content>
         </Card>
         )
