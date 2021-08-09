@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Grid } from "semantic-ui-react";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import CurrentWeather from "../../components/CurrentWeather/CurrentWeather";
@@ -7,20 +7,24 @@ import SevenDay from "../../components/SevenDay/SevenDay";
 import { useParams } from "react-router-dom";
 import * as cityAPI from "../../utils/cityApi"
 
-export default function CityPage({ user, handleLogout, logo, handleFormSubmit, city, searchCity}) {
+export default function CityPage({ user, handleLogout, logo}) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
+    const [zip, setZip] = useState("85034");
+    const [city, setCity] = useState(null);
+    const zipUrl = `https://api.openweathermap.org/data/2.5/weather?zip=${zip}&units=imperial&appid=${process.env.REACT_APP_WEATHER_API}`;
+    const zipFCUrl = `https://api.openweathermap.org/data/2.5/forecast?zip=${zip}&units=imperial&appid=${process.env.REACT_APP_WEATHER_API}`
 
-    const { zip } = useParams();
-    console.log(useParams())
-    console.log(zip)
-    console.log(city)
-    console.log(user.id)
+    function handleFormSubmit(zip) {
+        setZip(zip);
 
-    async function addCity(city) {
-        console.log(user._id)
+        // setCityFC(null);
+      }
+
+    async function addCity() {
+
         try {
-            const data = await cityAPI.create(city);
+            const data = await cityAPI.create(zip);
             console.log(data, " this is from addCity");
         
         } catch (err) {
@@ -28,17 +32,27 @@ export default function CityPage({ user, handleLogout, logo, handleFormSubmit, c
         }
       }
 
-      console.log(addCity);
-
-      async function removeCity(cityID) {
+      async function removeCity(zip) {
           try {
-              const data = await cityAPI.removeCity(cityID)
+              const data = await cityAPI.removeCity(zip)
           
           } catch (err) {
               console.log(err);
           }
       }
-console.log(user.city)
+
+      useEffect(() => {
+        if (zip) {
+    
+          fetch(zipUrl)
+    
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            setCity(data)
+          });
+        }
+      }, [zip]);
 
     return (
         <Grid centered>
@@ -48,21 +62,19 @@ console.log(user.city)
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
-                <SearchBar handleFormSubmit={handleFormSubmit} zip={zip} searchCity={searchCity} city={city}/>
+                <SearchBar handleFormSubmit={handleFormSubmit}/>
             </Grid.Row>
             <Grid.Row>
                 <Grid.Column>
-                    <CurrentWeather zip={zip} city={city} user={user} addCity={addCity} removeCity={removeCity} />
+                    <CurrentWeather city={city} user={user} addCity={addCity} removeCity={removeCity} />
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row>
                 <Grid.Column>
-                    <SevenDay zip={zip}/>
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row centered>
               <Grid.Column>
-                Map
               </Grid.Column>
             </Grid.Row>
           </Grid>

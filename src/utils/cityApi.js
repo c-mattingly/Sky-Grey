@@ -1,10 +1,9 @@
 import tokenService from "./tokenService";
 
-const BASE_URL = '/api/cities';
+const BASE_URL = '/api/cities/';
 
-export function create(userID) {
-    console.log(userID +  " <--- this is cityAPI create")
-    return fetch(BASE_URL + userID, {
+export function create(zip) {
+    return fetch(BASE_URL + zip, {
         method: 'POST',
         headers: {
             'Authorization': 'Bearer ' + tokenService.getToken()
@@ -15,15 +14,15 @@ export function create(userID) {
 	})
 }
 
-export function removeCity(cityID){
-	return fetch(`${BASE_URL}cities/${cityID}`, {
+export function removeCity(zip){
+	return fetch(BASE_URL + zip, {
 		method: 'DELETE',
 		headers: {
 			'Authorization': 'Bearer ' + tokenService.getToken()
 		}
 	}).then(res => {
 		if(res.ok) return res.json()
-	  new Error('Error revmoving City');
+	  new Error('Error removing City');
 	})
 }
 

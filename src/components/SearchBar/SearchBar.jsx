@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {useHistory, Link} from 'react-router-dom';
 
-export default function SearchBar ({user, handleFormSubmit, city, searchCity}) {
+export default function SearchBar ({user, handleFormSubmit}) {
   const [citySearch, setCitySearch] = useState("");
   const history = useHistory();
 
@@ -12,7 +12,6 @@ export default function SearchBar ({user, handleFormSubmit, city, searchCity}) {
   function handleSubmit(e) {
     e.preventDefault();
     handleFormSubmit(citySearch);
-    history.push(`/cities/${citySearch}`);
     
   }
 

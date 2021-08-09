@@ -3,6 +3,7 @@ const City = require("../models/city");
 module.exports = {
     show,
     create,
+    deleteCity,
 }
 
 async function create(req, res){
@@ -10,12 +11,22 @@ async function create(req, res){
 
     try {
         const city = await City.create({
-            zip: req.params, 
+            zip: req.params.zip, 
             user: req.user
         });
+        res.json({message: 'city added to user'})
     } catch (err) {
         console.log(err);
         res.json({ err });
+    }
+}
+
+async function deleteCity(req, res) {
+    try {
+        await City.findByIdAndDelete(req.params.zip)
+        res.json({data: 'city removed'})
+    } catch(err) {
+        console.log(err, 'error removing city')
     }
 }
 

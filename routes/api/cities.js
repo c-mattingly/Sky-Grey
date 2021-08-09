@@ -2,9 +2,10 @@ const express = require('express');
 const router = express.Router();
 const citiesCtrl = require('../../controllers/cities');
 /*---------- Public Routes ----------*/
-router.get('cities/:zip', citiesCtrl.create);
-router.get('/cities/:zip', citiesCtrl.show);
+router.post('/:zip', citiesCtrl.create);
+router.get('/:zip', citiesCtrl.show);
 
 /*---------- Protected Routes ----------*/
 
 
+module.exports = router;

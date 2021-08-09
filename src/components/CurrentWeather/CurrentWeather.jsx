@@ -2,8 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import { Card, Image, Icon } from 'semantic-ui-react';
 
-export default function CurrentWeather({
-    zip, 
+export default function CurrentWeather({ 
     city, 
     user,
     isProfile,
@@ -39,8 +38,8 @@ const likeColor = liked > -1 ? 'red' : 'green'
         return arr[(val % 16)];
     }  
 console.log(city)
-console.log(zip)
-    if ((zip) && (city)) {
+
+    if (city) {
 
         return (
             <Card className="CurrentWeather-card" centered>

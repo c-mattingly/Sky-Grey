@@ -90,9 +90,6 @@ export default function ProfilePage({ user, handleLogout, logo, setLogo, city, s
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
-              <Grid.Column>
-              <SearchBar handleFormSubmit={handleFormSubmit} searchCity={searchCity} city={city}/>
-              </Grid.Column>
             </Grid.Row>
             <Grid.Row>
                 <h1> {username}, here is the current weather in your cities</h1>
@@ -101,8 +98,10 @@ export default function ProfilePage({ user, handleLogout, logo, setLogo, city, s
             <Grid.Row>
                 <Grid.Column>
                     <CityFeed 
+                        city={city}
                         user={user}
                         numCitiesCol={3}
+                        cities={cities}
                         addCity={addCity}
                         removeCity={removeCity} 
                     />
