@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
-import { Button, Form, Grid, Header, Segment } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Segment, Image } from 'semantic-ui-react'
 import userService from '../../utils/userService';
 import { useHistory } from 'react-router-dom';
 
@@ -50,6 +50,9 @@ export default function SignUpPage(props){
         <>
         <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
           <Grid.Column style={{ maxWidth: 450 }}>
+              <Header>
+                <Image src="/logo.png" style={{ width: '500px', height: '152px'}}/>
+              </Header>
               <Header as='h2' color='black' textAlign='center'>
                 Sign Up    
               </Header>            

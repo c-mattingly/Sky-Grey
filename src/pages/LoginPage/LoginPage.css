@@ -1,3 +1,7 @@
 body {
     background: #4FA4F9;
 }
+
+.LoginPage-logo {
+    padding-bottom: 0px;
+}

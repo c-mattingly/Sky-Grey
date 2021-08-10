@@ -7,11 +7,11 @@ import {
     Button,
     Form,
     Grid,
+    Image,
     Header,
     Message,
     Segment,
   } from "semantic-ui-react";
-import { isCompositeComponentWithType } from 'react-dom/cjs/react-dom-test-utils.development';
 
 
 export default function LoginPage(props){
@@ -32,7 +32,6 @@ export default function LoginPage(props){
   
     async function handleSubmit(e) {
       e.preventDefault();
-  
       try {
         await userService.login(state);
         // Route to wherever you want!
@@ -51,6 +50,9 @@ export default function LoginPage(props){
           style={{ height: "100vh" }}
           verticalAlign="middle">
           <Grid.Column style={{ maxWidth: 450 }}>
+            <Header>
+                <Image src="/logo.png" style={{ width: '500px', height: '152px'}}/>
+            </Header>
             <Header as="h2" textAlign="center">
               Log In To Your Account
             </Header>

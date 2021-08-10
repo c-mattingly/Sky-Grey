@@ -5,7 +5,6 @@ import { Card, Image, Icon } from 'semantic-ui-react';
 export default function CurrentWeather({ 
     city, 
     user,
-    isProfile,
     addCity,
     removeCity,
     zip
@@ -18,9 +17,6 @@ const clickHandler = liked > -1 ? () => removeCity(user.city[liked]._id) : () =>
 const likeIcon = liked > -1 ? 'heart' : 'plus'
 const likeColor = liked > -1 ? 'red' : 'green'
 
-    function capitalizeFirstLetter(str) {
-        return str.charAt(0).toUpperCase() + str.slice(1); 
-      }
 
     function roundDecimal(int) {
         return Math.round(int)

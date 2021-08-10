@@ -22,12 +22,11 @@ export default function CityFeed({
             <Image src="https://react.semantic-ui.com/images/wireframe/short-paragraph.png" />
           </Segment>
         ) : null}
-        {city.map((c) => {
+        {cities.map((c) => {
           return (
             <CurrentWeather
               cities={cities}
-              key={city._id}
-              isProfile={isProfile}
+              key={c._id}
               addCity={addCity}
               removeCity={removeCity}
               user={user}

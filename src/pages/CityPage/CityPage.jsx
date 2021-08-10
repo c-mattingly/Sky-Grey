@@ -32,9 +32,9 @@ export default function CityPage({ user, handleLogout, logo}) {
         }
       }
 
-      async function removeCity(cityId) {
+      async function removeCity() {
           try {
-              const data = await cityAPI.removeCity(cityId)
+              const data = await cityAPI.removeCity(zip)
           
           } catch (err) {
               console.log(err);

@@ -28,7 +28,7 @@ function App() {
   
 
   // useEffect(() => {
-  //   if (citySearch) {
+  //   if (zip) {
   //     fetch(zipFCUrl)
 
   //     .then((res) => res.json())
@@ -37,7 +37,7 @@ function App() {
   //       setCityFC(data);
   //     })
   //   }
-  // }, [citySearch])
+  // }, [zip])
 
 
 

@@ -7,11 +7,14 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 import { useParams } from "react-router-dom";
 import * as cityAPI from "../../utils/cityApi";
 
-export default function ProfilePage({ user, handleLogout, logo, setLogo, city, searchCity, handleFormSubmit}) {
+export default function ProfilePage({ user, handleLogout, logo, setLogo}) {
     const [profileUser, setProfileUser] = useState({});
     const [cities, setCities] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
+    const [zip, setZip] = useState("85034");
+    const [city, setCity] = useState(null);
+    const zipUrl = `https://api.openweathermap.org/data/2.5/weather?zip=${zip}&units=imperial&appid=${process.env.REACT_APP_WEATHER_API}`;
 
     const { username } = useParams();
 
@@ -23,39 +26,58 @@ export default function ProfilePage({ user, handleLogout, logo, setLogo, city, s
     
           // data is the response from the controller function /api/users/profile
           // go to the controller function and look at what is returned
-          // posts and user are the properties on the data object
           setLoading(() => false);
           setProfileUser(() => data.user);
+          setCities(() => data.cities);
         } catch (err) {
           console.log(err);
           setError("Profile does not Exist");
         }
       }
 
-      async function addCity(userID) {
+
+    async function addCity() {
         try {
-            const data = await cityAPI.create(userID);
+            const data = await cityAPI.create(zip);
             console.log(data, " this is from addCity");
-            getProfile();
+        
         } catch (err) {
           console.log(err);
         }
-      }
+    }
 
-      console.log(addCity);
+    async function removeCity() {
+        try {
+            const data = await cityAPI.removeCity(zip)
+        
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
-      async function removeCity(cityID) {
-          try {
-              const data = await cityAPI.removeCity(cityID)
-              getProfile();
-          } catch (err) {
-              console.log(err);
+    function makeAPIWeatherCall(zipUrl) {
+    
+            fetch(zipUrl)
+      
+            .then((res) => res.json())
           }
-      }
+    
+    
+    async function generateAPICalls() {
+            const promises = cities.map((zip) => makeAPIWeatherCall(zip.zip))
+            console.log(cities)
+            const cityData = await Promise.all(promises)
+              console.log(cityData)
+              setCities(cityData)
+          }
 
-      useEffect(() => {
+    useEffect(() => {
         getProfile();
-      }, []);
+    }, []);
+     
+    useEffect(() => {
+        generateAPICalls();
+    }, []);
     
       if (error) {
         return (
@@ -86,14 +108,16 @@ export default function ProfilePage({ user, handleLogout, logo, setLogo, city, s
           <Grid>
             <Grid.Row>
               <Grid.Column>
-                <PageHeader logo={logo} user={user} handleLogout={handleLogout} logo={logo}/>
+                <PageHeader logo={logo} user={user} handleLogout={handleLogout}/>
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
             </Grid.Row>
-            <Grid.Row>
-                <h1> {username}, here is the current weather in your cities</h1>
-                <hr />
+            <Grid.Row centered >
+                <Grid.Column textAlign="center">
+                    <h1> {username}, here is the current weather in your cities</h1>
+                    <hr />
+                </Grid.Column>
             </Grid.Row>
             <Grid.Row>
                 <Grid.Column>
