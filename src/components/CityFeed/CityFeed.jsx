@@ -1,17 +1,18 @@
-import React from "react";
+import React, {useState} from "react";
 import { Card, Loader, Grid, Dimmer, Segment, Image } from "semantic-ui-react";
-import CurrentWeather from "../CurrentWeather/CurrentWeather";
+import CityCard from "../CityCard/CityCard";
 
 export default function CityFeed({
     cities,
     numCitiesCol,
-    isProfile,
+    cityReport,
     loading,
     addCity,
     removeCity,
     user,
     city
   }) {
+
     return (
       <Card.Group itemsPerRow={numCitiesCol} stackable>
         {loading ? (
@@ -22,10 +23,14 @@ export default function CityFeed({
             <Image src="https://react.semantic-ui.com/images/wireframe/short-paragraph.png" />
           </Segment>
         ) : null}
-        {cities.map((c) => {
+
+        {cityReport.map((c) => {
+            
           return (
-            <CurrentWeather
+            <CityCard
+              c={c}
               cities={cities}
+              cityReport={cityReport}
               key={c._id}
               addCity={addCity}
               removeCity={removeCity}

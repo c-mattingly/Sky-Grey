@@ -36,13 +36,16 @@ export default function LoginPage(props){
         await userService.login(state);
         // Route to wherever you want!
         props.handleSignUpOrLogin();
-        history.push("/");
+       
       } catch (err) {
         // Invalid user data (probably duplicate email)
         setError(err.message);
       }
     }
-
+    if (props.user) {
+        console.log(props.user)
+        history.push("/" + props.user.username);
+    }
     return (
         <>
         <Grid
