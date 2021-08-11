@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './LoginPage.css';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
 import userService from '../../utils/userService';
-import { useHistory, Link } from "react-router-dom";
+import { useHistory, Link, Redirect } from "react-router-dom";
 import {
     Button,
     Form,
@@ -42,10 +42,7 @@ export default function LoginPage(props){
         setError(err.message);
       }
     }
-    if (props.user) {
-        console.log(props.user)
-        history.push("/" + props.user.username);
-    }
+
     return (
         <>
         <Grid

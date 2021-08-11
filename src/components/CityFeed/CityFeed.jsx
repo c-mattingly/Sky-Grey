@@ -14,7 +14,7 @@ export default function CityFeed({
   }) {
 
     return (
-      <Card.Group itemsPerRow={numCitiesCol} stackable>
+      <Card.Group itemsPerRow={numCitiesCol} centered stackable>
         {loading ? (
           <Segment>
             <Dimmer active inverted>
@@ -24,14 +24,14 @@ export default function CityFeed({
           </Segment>
         ) : null}
 
-        {cityReport.map((c) => {
+        {cityReport.map((c, index) => {
             
           return (
             <CityCard
               c={c}
               cities={cities}
               cityReport={cityReport}
-              key={c._id}
+              key={index}
               addCity={addCity}
               removeCity={removeCity}
               user={user}

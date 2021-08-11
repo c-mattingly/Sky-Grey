@@ -26,6 +26,14 @@ code {
   color: #FFFFFF;
 }
 
+.PageHeader-logout {
+  color: #4FA4F9;
+}
+
+.PageHeader-logout:hover {
+  color: #FFFFFF;
+}
+
 .CurrentWeather-card {
   background: #4e4d4d !important;
   text-align: center;
@@ -36,8 +44,9 @@ code {
   background: #4e4d4d !important;
   text-align: center;
   color: #FFFFFF !important;
-  max-width: 400px !important;
-  margin-left: 100px !important;
+  max-width: 300px !important;
+  margin-left: 40px !important;
+  margin-right: 5px !important;
 }
 
 .LoginSignupForm {

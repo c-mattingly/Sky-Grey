@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Card, Image, Icon } from 'semantic-ui-react';
+import { Card, Image, Icon, Loader } from 'semantic-ui-react';
 
 export default function CurrentWeather({
     city,
@@ -11,12 +11,19 @@ export default function CurrentWeather({
 }) {
 
 
-    const liked = -1;
+    let liked = 0;
 
     const clickHandler = liked > -1 ? () => removeCity(user.city[liked]._id) : () => addCity(city._id);
-    const likeIcon = liked > -1 ? 'heart' : 'plus'
-    const likeColor = liked > -1 ? 'red' : 'green'
+    const likeIcon = liked === 1 ? 'heart' : 'plus'
+    const likeColor = liked === 1 ? 'red' : 'green'
 
+    function handleLikes() {
+        if (liked === 0) {
+            liked = 1
+        } else {
+            liked = 0
+        }
+    }
 
     function roundDecimal(int) {
         return Math.round(int)
@@ -27,7 +34,7 @@ export default function CurrentWeather({
         let arr = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
         return arr[(val % 16)];
     }
-    console.log(city)
+    console.log(zip)
     if ((city) && (city.name)) {
 
         return (
@@ -53,12 +60,27 @@ export default function CurrentWeather({
                     </Card.Description>
                 </Card.Content>
                 <Card.Content extra textAlign={"right"}>
-                    <Icon name={likeIcon} size="large" color={likeColor} onClick={clickHandler} />
-                    <Icon name="minus" size="large" color="red" onClick={removeCity} />
+                    <Icon name={likeIcon} size="large" color={likeColor} onClick={()=>addCity(city._id)} />
                 </Card.Content>
             </Card>
         )
     } else {
-        return <center><h1>Not a valid zip code, try again</h1></center>;
+        if (zip === "") {
+            return <center><h1>Search For A Zip Code</h1></center>;
+        } else if ((city) && (city.message === "city not found")) {
+            return <center><h1>Not a valid zip code, try again</h1></center>;
+        } else {
+            return (
+                <>
+                <br/><br/>
+                <br/>
+                <Loader size="large" active>
+                        Loading
+                    </Loader>
+                </>
+            )
+            
+        }
+        
     }
 }

@@ -43,8 +43,10 @@ export default function SignUpPage(props){
 
   }
  
-
- 
+  if (props.user) {
+    console.log(props.user)
+    history.push("/" + props.user.username);
+  }
     
     return (
         <>

@@ -3,9 +3,9 @@ import { Grid, Loader } from "semantic-ui-react";
 import userService from "../../utils/userService";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import CityFeed from "../../components/CityFeed/CityFeed";
-import SearchBar from "../../components/SearchBar/SearchBar";
 import { useParams } from "react-router-dom";
 import * as cityAPI from "../../utils/cityApi";
+import { useHistory } from "react-router-dom";
 
 export default function ProfilePage({ user, handleLogout, logo, setLogo }) {
     const [profileUser, setProfileUser] = useState({});
@@ -18,6 +18,7 @@ export default function ProfilePage({ user, handleLogout, logo, setLogo }) {
 
 
     const { username } = useParams();
+    const history = useHistory();
 
     async function getProfile() {
         try {
@@ -36,11 +37,6 @@ export default function ProfilePage({ user, handleLogout, logo, setLogo }) {
         }
     }
 
-    function handleFormSubmit(zip) {
-        setZip(zip);
-      }
-
-
     async function addCity() {
         try {
             const data = await cityAPI.create(zip);
@@ -54,7 +50,7 @@ export default function ProfilePage({ user, handleLogout, logo, setLogo }) {
     async function removeCity() {
         try {
             const data = await cityAPI.removeCity(zip)
-
+            history.push("/" + username)
         } catch (err) {
             console.log(err);
         }

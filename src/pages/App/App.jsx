@@ -5,7 +5,8 @@ import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import ProfilePage from '../ProfilePage/ProfilePage';
 import CityPage from '../CityPage/CityPage';
-import userService from '../../utils/userService'
+import userService from '../../utils/userService';
+import { useHistory, Link } from "react-router-dom";
 
 
 function App() {
@@ -15,32 +16,29 @@ function App() {
   // this  const token = createJWT(user); // where user was the document we created from mongo
   const [logo, setLogo] = useState("/logo-blue.png");
   
+  const history = useHistory();
   
   function handleSignUpOrLogin(){
     setUser(userService.getUser()); // getting the user from localstorage decoding the jwt
+    
   }
 
   function handleLogout(){
+    console.log("hello")
     userService.logout();
-    setUser({user: null})
+    // history.push("/login");
+    setUser(null);
+    
   }
 
+  useEffect(() => {
+    console.log(user, " <---user in app.jsx")
+    if (user) {
+      history.push(`/${user.username}`)
+    } 
+  }, [user])
+
   
-
-  // useEffect(() => {
-  //   if (zip) {
-  //     fetch(zipFCUrl)
-
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data)
-  //       setCityFC(data);
-  //     })
-  //   }
-  // }, [zip])
-
-
-
 
   return (
     <div className="App">

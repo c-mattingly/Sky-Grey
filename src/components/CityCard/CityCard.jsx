@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import { Card, Image, Icon } from 'semantic-ui-react';
 
@@ -12,14 +12,6 @@ export default function CityCard({
     zip,
     c
 }) {
-
-
-const liked = -1;
-
-const clickHandler = liked > -1 ? () => removeCity(user.cities[liked]._id) : () => addCity(cities._id);
-const likeIcon = liked > -1 ? 'heart' : 'plus'
-const likeColor = liked > -1 ? 'red' : 'green'
-
 
     function roundDecimal(int) {
         return Math.round(int)
@@ -36,6 +28,9 @@ const likeColor = liked > -1 ? 'red' : 'green'
             <Card className="CityCard-card" centered>
                 
             <Card.Content>
+            <Card.Content extra textAlign={"right"}>
+                <Icon name="x" size="large" color="red" onClick={removeCity}/>
+            </Card.Content>
             <Image src={`/${c.weather[0].icon}.png`} style={{ height: '150px'}} />
             
             <Card.Header><h1><span style={{ color: '#4FA4F9'}}>{c.name}</span></h1></Card.Header>
@@ -54,10 +49,7 @@ const likeColor = liked > -1 ? 'red' : 'green'
                 <b>Humidity:</b> {c.main.humidity}%<br/></span>
             </Card.Description>
             </Card.Content>
-            <Card.Content extra textAlign={"right"}>
-                <Icon name={likeIcon} size="large" color={likeColor} onClick={clickHandler}/>
-                <Icon name="minus" size="large" color="red" onClick={removeCity}/>
-            </Card.Content>
+            
         </Card>
         )
         } else {
