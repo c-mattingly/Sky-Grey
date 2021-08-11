@@ -47,9 +47,9 @@ export default function ProfilePage({ user, handleLogout, logo, setLogo }) {
         }
     }
 
-    async function removeCity() {
+    async function removeCity(zipcode) {
         try {
-            const data = await cityAPI.removeCity(zip)
+            const data = await cityAPI.removeCity(zipcode)
             history.push("/" + username)
         } catch (err) {
             console.log(err);

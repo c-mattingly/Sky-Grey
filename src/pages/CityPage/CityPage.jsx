@@ -53,7 +53,7 @@ export default function CityPage({ user, handleLogout, logo}) {
           });
         }
       }, [zip]);
-
+      console.log(zipUrl, " <----zipUrl")
     return (
         <Grid centered>
             <Grid.Row>
