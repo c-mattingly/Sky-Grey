@@ -34,7 +34,6 @@ export default function LoginPage(props){
       e.preventDefault();
       try {
         await userService.login(state);
-        // Route to wherever you want!
         props.handleSignUpOrLogin();
        
       } catch (err) {

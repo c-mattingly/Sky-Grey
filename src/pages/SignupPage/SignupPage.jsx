@@ -33,7 +33,7 @@ export default function SignUpPage(props){
             props.handleSignUpOrLogin() // gets the token from localstorage and updates the user state in our app.js
       // with the correct user object from the current token
       // then route to the homepage
-            history.push('/') // defined above from react-router-dom
+            history.push(`/${props.user.username}`) // defined above from react-router-dom
       // after this we can go whereever
 
     } catch(err){
@@ -43,10 +43,10 @@ export default function SignUpPage(props){
 
   }
  
-  if (props.user) {
-    console.log(props.user)
-    history.push("/" + props.user.username);
-  }
+//   if (props.user) {
+//     console.log(props.user)
+//     history.push("/login");
+//   }
     
     return (
         <>
