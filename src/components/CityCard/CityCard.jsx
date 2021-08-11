@@ -3,22 +3,14 @@ import {Link} from 'react-router-dom';
 import { Card, Image, Icon } from 'semantic-ui-react';
 
 export default function CityCard({ 
-    city, 
-    user,
-    cities, 
-    cityReport,
+    user, 
     addCity,
     removeCity,
-    zip,
     c,
-    index,
 }) {
 
-    // const likes = cities.zip.findIndex(zip)
-    let indexStore = index
-    console.log(cities[index])
-    console.log(cities.zip)
-    console.log(zip)
+    
+    
 
     function roundDecimal(int) {
         return Math.round(int)
@@ -32,19 +24,19 @@ export default function CityCard({
 
    
 
-    if ((c) && (c.name)) {
+   
 
         return (
             <Card className="CityCard-card" centered>
                 
             <Card.Content>
             <Card.Content extra textAlign={"right"}>
-                <Link className="CityCard-delete" to="" onClick={() => removeCity(cities[indexStore])}>X</Link>
+                <Link className="CityCard-delete" to="" onClick={(e) => removeCity(e, c.zip)}>X</Link>
             </Card.Content>
             <Image src={`/${c.weather[0].icon}.png`} style={{ height: '150px'}} />
             
             <Card.Header><h1><span style={{ color: '#4FA4F9'}}>{c.name}</span></h1>
-            <h4><span style={{ color: '#4FA4F9'}}>{cities[indexStore].zip}</span></h4></Card.Header>
+            <h4><span style={{ color: '#4FA4F9'}}>{c.zip}</span></h4></Card.Header>
             <hr />
             <Card.Header>
             <span style={{ color: '#FFFFFF'}}>{roundDecimal(c.main.temp)}°</span>
@@ -63,7 +55,5 @@ export default function CityCard({
             
         </Card>
         )
-        } else {
-            return null;
-        }
+        
     }

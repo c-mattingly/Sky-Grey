@@ -29,13 +29,10 @@ export default function CityFeed({
           return (
             <CityCard
               c={c}
-              cities={cities}
-              cityReport={cityReport}
               key={index}
               addCity={addCity}
               removeCity={removeCity}
               user={user}
-              index={index}
             />
           );
         })}

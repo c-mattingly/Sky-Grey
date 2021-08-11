@@ -17,8 +17,6 @@ export default function CityPage({ user, handleLogout, logo}) {
 
     function handleFormSubmit(zip) {
         setZip(zip);
-
-        // setCityFC(null);
       }
 
     async function addCity() {
@@ -53,7 +51,7 @@ export default function CityPage({ user, handleLogout, logo}) {
           });
         }
       }, [zip]);
-      
+
     return (
         <Grid centered>
             <Grid.Row>

@@ -11,9 +11,8 @@ export default function CurrentWeather({
 }) {
 
 
-    let liked = 0;
+  
 
-    const clickHandler = liked > -1 ? () => removeCity(user.city[liked]._id) : () => addCity(city._id);
     
 
     function roundDecimal(int) {

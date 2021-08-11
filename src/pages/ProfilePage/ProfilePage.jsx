@@ -12,9 +12,9 @@ export default function ProfilePage({ user, handleLogout, logo, setLogo }) {
     const [cities, setCities] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
-    const [zip, setZip] = useState("85034");
+    const [zip, setZip] = useState("");
     const [city, setCity] = useState(null);
-    const [cityReport, setCityReport] = useState(null);
+    const [cityReport, setCityReport] = useState([]);
 
 
     const { username } = useParams();
@@ -28,7 +28,7 @@ export default function ProfilePage({ user, handleLogout, logo, setLogo }) {
 
             // data is the response from the controller function /api/users/profile
             // go to the controller function and look at what is returned
-            setLoading(() => false);
+           
             setProfileUser(() => data.user);
             setCities(() => data.cities);
         } catch (err) {
@@ -47,10 +47,11 @@ export default function ProfilePage({ user, handleLogout, logo, setLogo }) {
         }
     }
 
-    async function removeCity(zipcode) {
+    async function removeCity(e, zipcode) {
+        e.preventDefault()
+        console.log(zipcode, " <---- this is the city")
         try {
             const data = await cityAPI.removeCity(zipcode)
-            history.push("/" + username)
             getProfile();
         } catch (err) {
             console.log(err);
@@ -69,8 +70,11 @@ export default function ProfilePage({ user, handleLogout, logo, setLogo }) {
         console.log(cities)
         console.log(promises)
         const cityData = await Promise.all(promises)
-        console.log(cityData)
+        const cityDataWithZip = cityData.map((c, i) => c.zip = cities[i].zip)
+        console.log(cityDataWithZip, " < this is citydatawithzip")
+        console.log(cityData, " <---cityData")
         setCityReport(cityData)
+        setLoading(() => false);
     }
 
     useEffect(() => {

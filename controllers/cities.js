@@ -22,9 +22,8 @@ async function create(req, res){
 }
 
 async function deleteCity(req, res) {
-    console.log(req.params.zip)
     try {
-        const deletedCity = await City.findOneAndDelete(req.params.zip)
+        const deletedCity = await City.findOneAndDelete({zip: req.params.zip})
         console.log(deletedCity, " <-- deletedCity")
         res.json({message: 'city removed'})
     } catch(err) {
