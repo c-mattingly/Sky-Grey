@@ -50,6 +50,7 @@ Go to **Sky Grey** <a href="https://skygrey.herokuapp.com/">here</a>
 <a href="https://trello.com/b/o8Revwb3/sky-grey">Trello Board</a>
 
 **Wireframe**
+<img src="https://i.imgur.com/Mor9ipU.png">
 
 **Original ERD**
 <img src="https://i.imgur.com/Se70wcK.png">
