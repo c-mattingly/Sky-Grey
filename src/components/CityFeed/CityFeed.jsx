@@ -35,6 +35,7 @@ export default function CityFeed({
               addCity={addCity}
               removeCity={removeCity}
               user={user}
+              index={index}
             />
           );
         })}

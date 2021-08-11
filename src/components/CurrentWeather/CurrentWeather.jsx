@@ -14,16 +14,7 @@ export default function CurrentWeather({
     let liked = 0;
 
     const clickHandler = liked > -1 ? () => removeCity(user.city[liked]._id) : () => addCity(city._id);
-    const likeIcon = liked === 1 ? 'heart' : 'plus'
-    const likeColor = liked === 1 ? 'red' : 'green'
-
-    function handleLikes() {
-        if (liked === 0) {
-            liked = 1
-        } else {
-            liked = 0
-        }
-    }
+    
 
     function roundDecimal(int) {
         return Math.round(int)
@@ -60,7 +51,7 @@ export default function CurrentWeather({
                     </Card.Description>
                 </Card.Content>
                 <Card.Content extra textAlign={"right"}>
-                    <Icon name={likeIcon} size="large" color={likeColor} onClick={()=>addCity(city._id)} />
+                    <Link className="CurrentWeather-addCity" to={`/${user.username}`} onClick={()=>addCity(city._id)} >+</Link>
                 </Card.Content>
             </Card>
         )

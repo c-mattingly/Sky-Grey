@@ -10,8 +10,15 @@ export default function CityCard({
     addCity,
     removeCity,
     zip,
-    c
+    c,
+    index,
 }) {
+
+    // const likes = cities.zip.findIndex(zip)
+    let indexStore = index
+    console.log(cities[index])
+    console.log(cities.zip)
+    console.log(zip)
 
     function roundDecimal(int) {
         return Math.round(int)
@@ -22,6 +29,9 @@ export default function CityCard({
         let arr = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
         return arr[(val % 16)];
     }  
+
+   
+
     if ((c) && (c.name)) {
 
         return (
@@ -29,11 +39,12 @@ export default function CityCard({
                 
             <Card.Content>
             <Card.Content extra textAlign={"right"}>
-                <Icon name="x" size="large" color="red" onClick={removeCity}/>
+                <Link className="CityCard-delete" to="" onClick={() => removeCity(cities[indexStore])}>X</Link>
             </Card.Content>
             <Image src={`/${c.weather[0].icon}.png`} style={{ height: '150px'}} />
             
-            <Card.Header><h1><span style={{ color: '#4FA4F9'}}>{c.name}</span></h1></Card.Header>
+            <Card.Header><h1><span style={{ color: '#4FA4F9'}}>{c.name}</span></h1>
+            <h4><span style={{ color: '#4FA4F9'}}>{cities[indexStore].zip}</span></h4></Card.Header>
             <hr />
             <Card.Header>
             <span style={{ color: '#FFFFFF'}}>{roundDecimal(c.main.temp)}°</span>

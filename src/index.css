@@ -49,6 +49,30 @@ code {
   margin-right: 5px !important;
 }
 
+.CityCard-delete {
+  color:#4FA4F9 !important;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.CityCard-delete:hover {
+  color: white !important;
+}
+
+.CurrentWeather-addCity {
+  color:#4FA4F9 !important;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.CurrentWeather-addCity:hover {
+  color: white !important;
+}
+
+.ui.icon.blue.CityCard-delete:hover {
+  background-color: black !important;
+}
+
 .LoginSignupForm {
   background: #4e4d4d !important;
   text-align: center;
