@@ -9,11 +9,6 @@ export default function CurrentWeather({
     zip
 }) {
 
-
-  
-
-    
-
     function roundDecimal(int) {
         return Math.round(int)
     }
@@ -23,7 +18,7 @@ export default function CurrentWeather({
         let arr = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
         return arr[(val % 16)];
     }
-    
+
     if ((city) && (city.name)) {
 
         return (

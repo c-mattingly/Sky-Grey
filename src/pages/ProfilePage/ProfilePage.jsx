@@ -32,16 +32,6 @@ export default function ProfilePage({ user, handleLogout, logo, setLogo }) {
         }
     }
 
-    async function addCity() {
-        try {
-            const data = await cityAPI.create(zip);
-            console.log(data, " this is from addCity");
-
-        } catch (err) {
-            console.log(err);
-        }
-    }
-
     async function removeCity(e, zipcode) {
         e.preventDefault()
         try {
