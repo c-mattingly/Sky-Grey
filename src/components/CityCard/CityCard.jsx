@@ -1,10 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
-import { Card, Image, Icon } from 'semantic-ui-react';
+import { Card, Image } from 'semantic-ui-react';
 
 export default function CityCard({ 
-    user, 
-    addCity,
     removeCity,
     c,
 }) {

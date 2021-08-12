@@ -5,7 +5,6 @@ import PageHeader from "../../components/PageHeader/PageHeader";
 import CityFeed from "../../components/CityFeed/CityFeed";
 import { useParams } from "react-router-dom";
 import * as cityAPI from "../../utils/cityApi";
-import { useHistory } from "react-router-dom";
 
 export default function ProfilePage({ user, handleLogout, logo, setLogo }) {
     const [profileUser, setProfileUser] = useState({});
@@ -13,18 +12,14 @@ export default function ProfilePage({ user, handleLogout, logo, setLogo }) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     const [zip, setZip] = useState("");
-    const [city, setCity] = useState(null);
     const [cityReport, setCityReport] = useState([]);
 
 
     const { username } = useParams();
-    const history = useHistory();
 
     async function getProfile() {
         try {
             const data = await userService.getProfile(username);
-            console.log(data, " data");
-            console.log(username)
 
             // data is the response from the controller function /api/users/profile
             // go to the controller function and look at what is returned
@@ -49,7 +44,6 @@ export default function ProfilePage({ user, handleLogout, logo, setLogo }) {
 
     async function removeCity(e, zipcode) {
         e.preventDefault()
-        console.log(zipcode, " <---- this is the city")
         try {
             const data = await cityAPI.removeCity(zipcode)
             getProfile();
@@ -67,12 +61,8 @@ export default function ProfilePage({ user, handleLogout, logo, setLogo }) {
 
     async function generateAPICalls() {
         const promises = cities.map((zip) => makeAPIWeatherCall(zip.zip))
-        console.log(cities)
-        console.log(promises)
         const cityData = await Promise.all(promises)
         const cityDataWithZip = cityData.map((c, i) => c.zip = cities[i].zip)
-        console.log(cityDataWithZip, " < this is citydatawithzip")
-        console.log(cityData, " <---cityData")
         setCityReport(cityData)
         setLoading(() => false);
     }
@@ -126,12 +116,8 @@ export default function ProfilePage({ user, handleLogout, logo, setLogo }) {
                 <Grid.Row>
                     <Grid.Column>
                         <CityFeed
-                            city={city}
-                            user={user}
                             numCitiesCol={3}
-                            cities={cities}
                             cityReport={cityReport}
-                            addCity={addCity}
                             removeCity={removeCity}
                         />
                     </Grid.Column>

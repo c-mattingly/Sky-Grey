@@ -1,16 +1,12 @@
-import React, {useState} from "react";
-import { Card, Loader, Grid, Dimmer, Segment, Image } from "semantic-ui-react";
+import React from "react";
+import { Card, Loader, Dimmer, Segment, Image } from "semantic-ui-react";
 import CityCard from "../CityCard/CityCard";
 
 export default function CityFeed({
-    cities,
     numCitiesCol,
     cityReport,
     loading,
-    addCity,
     removeCity,
-    user,
-    city
   }) {
 
     return (
@@ -30,9 +26,7 @@ export default function CityFeed({
             <CityCard
               c={c}
               key={index}
-              addCity={addCity}
               removeCity={removeCity}
-              user={user}
             />
           );
         })}

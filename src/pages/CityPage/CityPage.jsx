@@ -4,7 +4,6 @@ import PageHeader from "../../components/PageHeader/PageHeader";
 import CurrentWeather from "../../components/CurrentWeather/CurrentWeather";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import SevenDay from "../../components/SevenDay/SevenDay";
-import { useParams } from "react-router-dom";
 import * as cityAPI from "../../utils/cityApi"
 
 export default function CityPage({ user, handleLogout, logo}) {
