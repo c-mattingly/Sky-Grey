@@ -6,7 +6,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import ProfilePage from '../ProfilePage/ProfilePage';
 import CityPage from '../CityPage/CityPage';
 import userService from '../../utils/userService';
-import { useHistory, Link } from "react-router-dom";
+import { useHistory} from "react-router-dom";
 
 
 function App() {
@@ -32,7 +32,6 @@ function App() {
   }
 
   useEffect(() => {
-    console.log(user, " <---user in app.jsx")
     if (user) {
       history.push(`/${user.username}`)
     } 

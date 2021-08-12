@@ -15,7 +15,6 @@ export function create(zip) {
 }
 
 export function removeCity(zip){
-    console.log(zip, " <--- zip removeCity function")
 	return fetch(`${BASE_URL}${zip}`, {
 		method: 'DELETE',
 		headers: {

@@ -1,12 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Card, Image, Icon, Loader } from 'semantic-ui-react';
+import { Card, Image, Loader } from 'semantic-ui-react';
 
 export default function CurrentWeather({
     city,
     user,
     addCity,
-    removeCity,
     zip
 }) {
 
@@ -24,7 +23,7 @@ export default function CurrentWeather({
         let arr = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
         return arr[(val % 16)];
     }
-    console.log(zip)
+    
     if ((city) && (city.name)) {
 
         return (

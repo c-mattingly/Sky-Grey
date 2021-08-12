@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Loader } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import CurrentWeather from "../../components/CurrentWeather/CurrentWeather";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import SevenDay from "../../components/SevenDay/SevenDay";
 import * as cityAPI from "../../utils/cityApi"
 
 export default function CityPage({ user, handleLogout, logo}) {
@@ -22,20 +21,10 @@ export default function CityPage({ user, handleLogout, logo}) {
 
         try {
             const data = await cityAPI.create(zip);
-            console.log(data, " this is from addCity");
         
         } catch (err) {
           console.log(err);
         }
-      }
-
-      async function removeCity() {
-          try {
-              const data = await cityAPI.removeCity(zip)
-          
-          } catch (err) {
-              console.log(err);
-          }
       }
 
       useEffect(() => {
@@ -45,7 +34,6 @@ export default function CityPage({ user, handleLogout, logo}) {
     
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             setCity(data)
           });
         }
@@ -63,7 +51,7 @@ export default function CityPage({ user, handleLogout, logo}) {
             </Grid.Row>
             <Grid.Row>
                 <Grid.Column>
-                    <CurrentWeather city={city} user={user} addCity={addCity} removeCity={removeCity} zip={zip}/>
+                    <CurrentWeather city={city} user={user} addCity={addCity} zip={zip}/>
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row>

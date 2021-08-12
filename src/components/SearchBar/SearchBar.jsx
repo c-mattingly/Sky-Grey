@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import {useHistory, Link} from 'react-router-dom';
 
-export default function SearchBar ({user, handleFormSubmit}) {
+export default function SearchBar ({handleFormSubmit}) {
   const [citySearch, setCitySearch] = useState("");
-  const history = useHistory();
 
   function handleInput(e) {
     setCitySearch(e.target.value);
